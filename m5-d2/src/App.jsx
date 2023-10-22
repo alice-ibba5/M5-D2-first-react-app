@@ -4,6 +4,8 @@ import Col from 'react-bootstrap/Col';
 import './App.css';
 import NavBar from './NavBar';
 import Welcome from './Welcome';
+import Books from './Books';
+import FooterWithLogo from './Footer';
 
 function App() {
   return (
@@ -12,8 +14,11 @@ function App() {
     <Container>
       <Row>
         <Col><Welcome /></Col>
-      </Row>
+        <Books />
+      </Row>      
     </Container>
+    <FooterWithLogo />
+    
     </>
   );
 }
