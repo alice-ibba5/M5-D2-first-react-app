@@ -1,23 +1,38 @@
-import data from "./fantasy.json";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { useState } from 'react'
+import { Col, Row, Form } from 'react-bootstrap'
+import fantasy from './fantasy.json'
+import SingleBook from './SingleBook'
 
-function Books() {
-    return (
-        <Container>
-            <Row className="row-gap-1">
-               {data.map((item) => (
-                         
-                <Col xs={3}>
-                <img src={item.img} alt="" className="w-100 m-2" />
-                </Col>
-          
-        ))}
-           </Row>
-      </Container>
-    );
-  }
+const Books = () => {
+  const [searchQuery, setSearchQuery] = useState('')
 
+  return (
+    <>
+      <Row className="justify-content-center mt-5">
+        <Col xs={12} md={4} className="text-center">
+          <Form.Group>
+            <Form.Control
+              type="search"
+              placeholder="Cerca un libro"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row className="g-2 mt-3">
+        {fantasy
+          .filter((b) => b.title.toLowerCase().includes(searchQuery))
+          .map((book) => {
+            return (
+              <Col xs={12} md={4} key={book.asin}>
+                <SingleBook book={book} />
+              </Col>
+            )
+          })}
+      </Row>
+    </>
+  )
+}
 
-export default Books;
+export default Books
