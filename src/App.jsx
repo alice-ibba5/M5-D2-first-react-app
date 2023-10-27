@@ -2,10 +2,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './App.css';
-import NavBar from './NavBar';
-import Welcome from './Welcome';
-import Books from './Books';
-import FooterWithLogo from './Footer';
+import NavBar from './components/NavBar';
+import Welcome from './components/Welcome';
+import Books from './components/Books';
+import FooterWithLogo from './components/Footer';
 
 function App() {
   return (

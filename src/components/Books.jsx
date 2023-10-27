@@ -1,13 +1,40 @@
 import { useState } from 'react'
-import { Col, Row, Form } from 'react-bootstrap'
-import fantasy from './fantasy.json'
+import { Col, Container, Form, Row, Tab, Tabs } from "react-bootstrap";
+import fantasy from '../data/fantasy.json'
+import history from '../data/history.json'
+import horror from '../data/horror.json'
+import romance from '../data/romance.json'
+import scifi from '../data/scifi.json'
 import SingleBook from './SingleBook'
+
+const BooksByGenre = {
+  fantasy,
+  history,
+  horror,
+  romance,
+  scifi,
+};
 
 const Books = () => {
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedGenre, setSelectedGenre] = useState("fantasy");
+
+  const allTheBooks = BooksByGenre[selectedGenre];
+
+  
 
   return (
-    <>
+    <Container>
+      <Tabs
+        defaultActiveKey="profile"
+        id="justify-tab-example"
+        className="my-3"
+        justify
+        onSelect={(genre) => setSelectedGenre(genre)}>
+        {Object.keys(BooksByGenre).map((genre) => (
+          <Tab eventKey={genre} title={genre} />
+        ))}
+      </Tabs>
       <Row className="justify-content-center mt-5">
         <Col xs={12} md={4} className="text-center">
           <Form.Group>
@@ -21,7 +48,7 @@ const Books = () => {
         </Col>
       </Row>
       <Row className="g-2 mt-3">
-        {fantasy
+        {allTheBooks
           .filter((b) => b.title.toLowerCase().includes(searchQuery))
           .map((book) => {
             return (
@@ -31,7 +58,7 @@ const Books = () => {
             )
           })}
       </Row>
-    </>
+      </Container>
   )
 }
 
