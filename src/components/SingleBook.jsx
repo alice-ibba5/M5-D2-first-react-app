@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-
+import CommentArea from './CommentArea'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useState } from 'react'
@@ -21,7 +21,7 @@ const SingleBook = ({ book }) => {
         <Button variant="primary">Go somewhere</Button>
       </Card.Body>
     </Card>
-    
+    {selected && <CommentArea asin={book.asin} />}
     </Row>
     </Container>
   );
