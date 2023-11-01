@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Col, Container, Form, Row, Tab, Tabs } from "react-bootstrap";
+import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import fantasy from '../data/fantasy.json'
 import history from '../data/history.json'
 import horror from '../data/horror.json'
@@ -15,8 +15,7 @@ const BooksByGenre = {
   scifi,
 };
 
-const Books = () => {
-  const [searchQuery, setSearchQuery] = useState('')
+const Books = ({ searchQuery }) => {
   const [selectedGenre, setSelectedGenre] = useState("fantasy");
 
   const allTheBooks = BooksByGenre[selectedGenre];
@@ -35,18 +34,7 @@ const Books = () => {
           <Tab eventKey={genre} title={genre} />
         ))}
       </Tabs>
-      <Row className="justify-content-center mt-5">
-        <Col xs={12} md={4} className="text-center">
-          <Form.Group>
-            <Form.Control
-              type="search"
-              placeholder="Cerca un libro"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-      </Row>
+      
       <Row className="g-2 mt-3">
         {allTheBooks
           .filter((b) => b.title.toLowerCase().includes(searchQuery))

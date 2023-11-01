@@ -6,15 +6,17 @@ import NavBar from './components/NavBar';
 import Welcome from './components/Welcome';
 import Books from './components/Books';
 import FooterWithLogo from './components/Footer';
+import { useState } from 'react'
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState('')
   return (
     <>
-    <NavBar />
+    <NavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     <Container>
       <Row>
         <Col><Welcome /></Col>
-        <Books />
+        <Books searchQuery={searchQuery} />
       </Row>      
     </Container>
     <FooterWithLogo />

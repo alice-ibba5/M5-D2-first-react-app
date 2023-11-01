@@ -1,8 +1,6 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Navbar, Nav, Container, Form, Col, Row } from 'react-bootstrap'
 
-function NavBar() {
+const NavBar = ({ searchQuery, setSearchQuery }) => {
   return (
     <Navbar expand="lg" className="navbar" data-bs-theme="dark">
       <Container>
@@ -15,6 +13,18 @@ function NavBar() {
             <Nav.Link href="#browse">Browse</Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        <Row className="justify-content-center">
+        <Col xs={12} md={9} className="text-center">
+          <Form.Group>
+            <Form.Control
+              type="search"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
       </Container>
     </Navbar>
   );
