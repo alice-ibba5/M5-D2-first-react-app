@@ -54,3 +54,13 @@ footer {
 .navbar {
   background-color: rgb(52, 43, 58);
 }
+
+.dark {
+  
+  background-color: #fff;
+}
+
+.light {
+  background-color: black;
+  
+}

@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
+import { Col, Row, Tab, Tabs } from "react-bootstrap";
 import fantasy from '../data/fantasy.json'
 import history from '../data/history.json'
 import horror from '../data/horror.json'
 import romance from '../data/romance.json'
 import scifi from '../data/scifi.json'
 import SingleBook from './SingleBook'
+import CommentArea from './CommentArea';
 
 const BooksByGenre = {
   fantasy,
@@ -17,13 +18,14 @@ const BooksByGenre = {
 
 const Books = ({ searchQuery }) => {
   const [selectedGenre, setSelectedGenre] = useState("fantasy");
+  const [selected, setSelected] = useState(false)
 
   const allTheBooks = BooksByGenre[selectedGenre];
 
   
 
   return (
-    <Container>
+    <Row>
       <Tabs
         defaultActiveKey="profile"
         id="justify-tab-example"
@@ -35,18 +37,27 @@ const Books = ({ searchQuery }) => {
         ))}
       </Tabs>
       
+      <Col md={8}>
       <Row className="g-2 mt-3">
         {allTheBooks
           .filter((b) => b.title.toLowerCase().includes(searchQuery))
           .map((book) => {
             return (
               <Col xs={12} md={3} key={book.asin}>
-                <SingleBook book={book} />
+                <SingleBook 
+                book={book} 
+                selected={selected}
+                setSelected={setSelected}                
+                />
               </Col>
             )
           })}
       </Row>
-      </Container>
+      </Col>
+      <Col md={4}>
+        <CommentArea asin={selected} />
+      </Col>
+      </Row>
   )
 }
 

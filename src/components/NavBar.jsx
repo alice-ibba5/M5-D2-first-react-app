@@ -1,8 +1,13 @@
 import { Navbar, Nav, Container, Form, Col, Row } from 'react-bootstrap'
+import ThemeContext from "../contexts/theme"
+import { useContext } from "react";
 
 const NavBar = ({ searchQuery, setSearchQuery }) => {
+  const { theme, setTheme } = useContext(ThemeContext);
+
   return (
-    <Navbar expand="lg" className="navbar" data-bs-theme="dark">
+    <Navbar expand="lg" className="navbar sticky-top"
+      variant={theme} data-bs-theme="dark">
       <Container>
         <Navbar.Brand href="#home">EpiBooks</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -14,7 +19,7 @@ const NavBar = ({ searchQuery, setSearchQuery }) => {
           </Nav>
         </Navbar.Collapse>
         <Row className="justify-content-center">
-        <Col xs={12} md={9} className="text-center">
+        <Col xs={6} md={9} className="text-center">
           <Form.Group>
             <Form.Control
               type="search"
@@ -24,6 +29,11 @@ const NavBar = ({ searchQuery, setSearchQuery }) => {
             />
           </Form.Group>
         </Col>
+        <Col xs={6} md={3} className="text-center">
+        <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+            {theme}
+          </button>
+          </Col>
       </Row>
       </Container>
     </Navbar>
