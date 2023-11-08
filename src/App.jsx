@@ -8,6 +8,9 @@ import Books from './components/Books';
 import FooterWithLogo from './components/Footer';
 import { useState } from 'react'
 import ThemeContext from "./contexts/theme";  
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NotFound from './components/NotFound';
+import BookDetails from './components/BookDetails';
 
 
 function App() {
@@ -15,7 +18,7 @@ function App() {
   const [theme, setTheme] = useState("dark");
 
   return (
-    <>
+    <BrowserRouter>
     <ThemeContext.Provider value={{ theme, setTheme }}>
     <div className={`${theme} App`}>
     <NavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -23,16 +26,18 @@ function App() {
       
         <Col><Welcome /></Col>
         <Row className="d-flex">        
-          <Col>
-             <Books searchQuery={searchQuery} />
-          </Col>        
+        <Routes>
+          <Route path="/" element={<Books searchQuery={searchQuery} />} />
+          <Route path="/details/:asin" element={<BookDetails />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>     
         </Row>      
     </Container>
     <FooterWithLogo />
     </div>
     </ThemeContext.Provider>
     
-    </>
+    </BrowserRouter>
   );
 }
 

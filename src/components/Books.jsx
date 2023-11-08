@@ -6,7 +6,7 @@ import horror from '../data/horror.json'
 import romance from '../data/romance.json'
 import scifi from '../data/scifi.json'
 import SingleBook from './SingleBook'
-import CommentArea from './CommentArea';
+
 
 const BooksByGenre = {
   fantasy,
@@ -37,7 +37,7 @@ const Books = ({ searchQuery }) => {
         ))}
       </Tabs>
       
-      <Col md={8}>
+      <Col md={12}>
       <Row className="g-2 mt-3">
         {allTheBooks
           .filter((b) => b.title.toLowerCase().includes(searchQuery))
@@ -53,9 +53,6 @@ const Books = ({ searchQuery }) => {
             )
           })}
       </Row>
-      </Col>
-      <Col md={4}>
-        <CommentArea asin={selected} />
       </Col>
       </Row>
   )
