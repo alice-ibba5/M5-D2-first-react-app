@@ -8,36 +8,53 @@ import Books from './components/Books';
 import FooterWithLogo from './components/Footer';
 import { useState } from 'react'
 import ThemeContext from "./contexts/theme";  
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import BookDetails from './components/BookDetails';
+import fantasy from '../src/data/fantasy.json'
+import history from '../src/data/history.json'
+import horror from '../src/data/horror.json'
+import romance from '../src/data/romance.json'
+import scifi from '../src/data/scifi.json'
+import GenreContext from '../src/contexts/genre'
 
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
   const [theme, setTheme] = useState("dark");
 
+  const BooksByGenre = {
+    fantasy,
+    history,
+    horror,
+    romance,
+    scifi,
+  };
+
   return (
-    <BrowserRouter>
+    
     <ThemeContext.Provider value={{ theme, setTheme }}>
     <div className={`${theme} App`}>
     <NavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+    <GenreContext.Provider value={{BooksByGenre}}>
     <Container>
       
         <Col><Welcome /></Col>
         <Row className="d-flex">        
         <Routes>
           <Route path="/" element={<Books searchQuery={searchQuery} />} />
-          <Route path="/details/:asin" element={<BookDetails />} />
+          <Route path="/:genre" element={<Books searchQuery={searchQuery} />} />
+          <Route path="/:genre/:id" element={<BookDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>     
         </Row>      
     </Container>
+    </GenreContext.Provider>
     <FooterWithLogo />
     </div>
     </ThemeContext.Provider>
     
-    </BrowserRouter>
+   
   );
 }
 

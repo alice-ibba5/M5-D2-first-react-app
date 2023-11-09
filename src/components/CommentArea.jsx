@@ -44,10 +44,12 @@ const CommentArea = ({ asin }) => {
   }, [asin])
 
   return (
-    <div className="text-center sticky-top mt-5 bg-white">
+    <div className="text-center mt-5 bg-white">
       {isLoading && <Loading />}
       {isError && <Error />}
+      <h3>Add a comment:</h3>
       <AddComment asin={asin} />
+      <h3>Comment list:</h3>
       <CommentList commentsToShow={comments} />
     </div>
   )

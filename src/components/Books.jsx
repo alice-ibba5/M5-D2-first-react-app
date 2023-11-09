@@ -1,47 +1,40 @@
-import { useState } from 'react'
+
 import { Col, Row, Tab, Tabs } from "react-bootstrap";
-import fantasy from '../data/fantasy.json'
-import history from '../data/history.json'
-import horror from '../data/horror.json'
-import romance from '../data/romance.json'
-import scifi from '../data/scifi.json'
+import { useContext, useState } from "react";
 import SingleBook from './SingleBook'
+import { useNavigate, useParams } from "react-router-dom";
+import GenreContext from '../contexts/genre';
 
 
-const BooksByGenre = {
-  fantasy,
-  history,
-  horror,
-  romance,
-  scifi,
-};
 
 const Books = ({ searchQuery }) => {
-  const [selectedGenre, setSelectedGenre] = useState("fantasy");
+ 
   const [selected, setSelected] = useState(false)
 
-  const allTheBooks = BooksByGenre[selectedGenre];
+  
+    const { genre } = useParams()
+    const navigate = useNavigate()
+    const { BooksByGenre } = useContext(GenreContext)
+    const allTheBooks = BooksByGenre[genre]
 
   
 
   return (
     <Row>
       <Tabs
-        defaultActiveKey="profile"
-        id="justify-tab-example"
+        activeKey={genre ? genre : ""}
+        id="books"
         className="my-3"
         justify
-        onSelect={(genre) => setSelectedGenre(genre)}>
-        {Object.keys(BooksByGenre).map((genre) => (
-          <Tab eventKey={genre} title={genre} />
+        onSelect={(genre) => {navigate(`/${genre}`)}}>
+        {Object.keys(BooksByGenre).map((genre, i) => (
+          <Tab eventKey={genre} title={genre} key={i} />
         ))}
       </Tabs>
       
       <Col md={12}>
       <Row className="g-2 mt-3">
-        {allTheBooks
-          .filter((b) => b.title.toLowerCase().includes(searchQuery))
-          .map((book) => {
+        {allTheBooks?.filter((b) => b.title.toLowerCase().includes(searchQuery)).map((book) => {
             return (
               <Col xs={12} md={3} key={book.asin}>
                 <SingleBook 

@@ -1,43 +1,36 @@
 import { Card, Col, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import CommentArea from './CommentArea'
-import fantasy from '../data/fantasy.json'
-import history from '../data/history.json'
-import horror from '../data/horror.json'
-import romance from '../data/romance.json'
-import scifi from '../data/scifi.json'
+import GenreContext from '../contexts/genre';
+import { useContext } from "react";
+
 
 
 
 const BookDetails = () => {
-  const { genre: genereParam } = useParams()
-
-  const BooksByGenre = {
-    fantasy,
-    history,
-    horror,
-    romance,
-    scifi,
-  };
+  const { genre, id } = useParams()
+  const { BooksByGenre } = useContext(GenreContext)
   
-  const params = useParams()
-  const allTheBooks = BooksByGenre[genereParam];
-  
-  const foundBook = allTheBooks.find((book) => book.asin === params.asin)
+  const SelectedBook = BooksByGenre[genre].find((book) => book.asin === id)
 
   return (
-    <Row className="justify-content-center">
-      <Col md={8}>
-        <Card>
-          <Card.Img variant="top" src={foundBook.img} />
+    <Row className="d-flex">
+      <Col md={6}>
+        <Card className='my-5' style={{ width: '20rem' }}>
+          <Card.Img variant="top" src={SelectedBook.img}  />
           <Card.Body>
             <Card.Title style={{ color: 'black' }}>
-              {foundBook.title}
+              {SelectedBook.title}
             </Card.Title>
+            <Card.Text>
+            {SelectedBook.price} €
+        </Card.Text>
           </Card.Body>
         </Card>
-        <CommentArea asin={params.asin} />
-      </Col>
+        </Col>
+      <Col md={6}>
+        <CommentArea asin={id} />
+        </Col>
     </Row>
   )
 }
