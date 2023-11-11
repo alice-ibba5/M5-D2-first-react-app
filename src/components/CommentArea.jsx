@@ -44,7 +44,7 @@ const CommentArea = ({ asin }) => {
   }, [asin])
 
   return (
-    <div className="text-center mt-5 bg-white">
+    <div className="text-center mt-5">
       {isLoading && <Loading />}
       {isError && <Error />}
       <h3>Add a comment:</h3>

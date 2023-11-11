@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 
 const AddComment = ({ asin }) => {
   const [comment, setComment] = useState({
@@ -30,7 +31,7 @@ const AddComment = ({ asin }) => {
         }
       )
       if (response.ok) {
-        alert('Recensione inviata!')
+        toast.success('Recensione inviata!')
         setComment({
           comment: '',
           rate: 1,
@@ -40,7 +41,7 @@ const AddComment = ({ asin }) => {
         throw new Error('Qualcosa è andato storto')
       }
     } catch (error) {
-      alert(error)
+      toast.warn(error)
     }
   }
 

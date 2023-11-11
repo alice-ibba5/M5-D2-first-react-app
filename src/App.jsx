@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import './App.css';
+import './App.scss';
 import NavBar from './components/NavBar';
 import Welcome from './components/Welcome';
 import Books from './components/Books';
@@ -17,6 +17,8 @@ import horror from '../src/data/horror.json'
 import romance from '../src/data/romance.json'
 import scifi from '../src/data/scifi.json'
 import GenreContext from '../src/contexts/genre'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -48,6 +50,17 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>     
         </Row>      
+        <ToastContainer 
+           position="bottom-right"
+           autoClose={5000}
+           hideProgressBar={false}
+           newestOnTop={false}
+           closeOnClick
+           rtl={false}
+           pauseOnFocusLoss
+           draggable
+           pauseOnHover
+           theme="dark" />
     </Container>
     </GenreContext.Provider>
     <FooterWithLogo />
