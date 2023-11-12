@@ -13,7 +13,7 @@ const SingleBook = ({ setSelected, selected, book, asin }) => {
 
   return (
     <Container>
-        <Row className="row-gap-2 d-flex">
+        <Row className="row-gap-2 d-flex flex-wrap">
     
     <Card onClick={() => setSelected(book.asin)}
       style={{ border: selected === book.asin ? '3px solid red' : 'none' }} className={cn ("flex-grow-1", styles.card)}>

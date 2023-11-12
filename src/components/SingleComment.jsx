@@ -15,8 +15,8 @@ const SingleComment = ({ comment, getAllComments }) => {
         }
       )
       if (response.ok) {
-        toast.success('La recensione è stata eliminata!')
-        getAllComments()
+        toast.success('La recensione è stata eliminata!');
+        getAllComments();
       } else {
         throw new Error('La recensione non è stata eliminata!')
       }

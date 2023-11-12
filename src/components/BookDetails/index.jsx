@@ -1,8 +1,10 @@
 import { Card, Col, Row } from 'react-bootstrap'
 import { useParams, useNavigate } from "react-router-dom";
-import CommentArea from './CommentArea'
-import GenreContext from '../contexts/genre';
+import CommentArea from '../CommentArea'
+import GenreContext from '../../contexts/genre';
 import { useContext, useCallback, useEffect } from "react";
+import cn from "classnames";
+import styles from "./styles.module.scss";
 
 export default function BookDetails () {
   const { genre, id } = useParams()
@@ -42,7 +44,7 @@ export default function BookDetails () {
   return (
     <Row className="d-flex">
       <Col md={6}>
-        <Card className='my-5' style={{ width: '20rem' }}>
+        <Card className={cn ("my-5", styles.card)} style={{ width: '20rem' }}>
           <Card.Img variant="top" src={SelectedBook.img}  />
           <Card.Body>
             <Card.Title style={{ color: 'black' }}>
@@ -55,7 +57,7 @@ export default function BookDetails () {
         </Card>
         </Col>
       <Col md={6}>
-        <CommentArea asin={id} getAllComments={getAllComments} />
+        <CommentArea asin={id} />
         </Col>
     </Row>
   );

@@ -36,7 +36,7 @@ const Books = ({ searchQuery }) => {
       <Row className="g-2 mt-3 row-gap-2">
         {allTheBooks?.filter((b) => b.title.toLowerCase().includes(searchQuery)).map((book) => {
             return (
-              <Col xs={12} md={3} key={book.asin} className="d-flex">
+              <Col xs={12} md={3} sm={4} key={book.asin} className="d-flex">
                 <SingleBook 
                 book={book} 
                 selected={selected}

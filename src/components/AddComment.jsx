@@ -50,7 +50,7 @@ import { toast } from 'react-toastify'
 
   return (
     <div className="my-3">
-      <Form onSubmit={sendComment}>
+      <Form onSubmit={sendComment} >
         <Form.Group className="mb-2">
           <Form.Label>Recensione</Form.Label>
           <Form.Control
@@ -84,7 +84,7 @@ import { toast } from 'react-toastify'
             <option>5</option>
           </Form.Control>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onSubmit={getAllComments}>
           Invia
         </Button>
       </Form>
