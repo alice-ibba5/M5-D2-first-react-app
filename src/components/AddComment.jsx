@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-const AddComment = ({ asin }) => {
+ const AddComment = ({ asin, getAllComments }) => {
   const [comment, setComment] = useState({
     comment: '',
     rate: 1,
@@ -31,12 +31,14 @@ const AddComment = ({ asin }) => {
         }
       )
       if (response.ok) {
-        toast.success('Recensione inviata!')
+        toast.success('Recensione inviata!')        
         setComment({
           comment: '',
           rate: 1,
           elementId: null,
         })
+        getAllComments()
+
       } else {
         throw new Error('Qualcosa è andato storto')
       }
@@ -44,6 +46,7 @@ const AddComment = ({ asin }) => {
       toast.warn(error)
     }
   }
+
 
   return (
     <div className="my-3">
@@ -86,7 +89,7 @@ const AddComment = ({ asin }) => {
         </Button>
       </Form>
     </div>
-  )
+  );
 }
 
 export default AddComment

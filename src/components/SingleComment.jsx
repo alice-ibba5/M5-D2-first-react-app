@@ -2,7 +2,7 @@ import { Button, ListGroup } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { Trash } from 'react-bootstrap-icons';
 
-const SingleComment = ({ comment }) => {
+const SingleComment = ({ comment, getAllComments }) => {
   const deleteComment = async (asin) => {
     try {
       let response = await fetch(
@@ -16,6 +16,7 @@ const SingleComment = ({ comment }) => {
       )
       if (response.ok) {
         toast.success('La recensione è stata eliminata!')
+        getAllComments()
       } else {
         throw new Error('La recensione non è stata eliminata!')
       }

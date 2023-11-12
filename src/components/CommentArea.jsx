@@ -4,7 +4,7 @@ import AddComment from './AddComment'
 import Loading from './Loading'
 import Error from './Error'
 
-const CommentArea = ({ asin }) => {
+const CommentArea = ({ asin, getAllComments }) => {
   const [comments, setComments] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
@@ -48,9 +48,9 @@ const CommentArea = ({ asin }) => {
       {isLoading && <Loading />}
       {isError && <Error />}
       <h3>Add a comment:</h3>
-      <AddComment asin={asin} />
+      <AddComment asin={asin} getAllComments={getAllComments}/>
       <h3>Comment list:</h3>
-      <CommentList commentsToShow={comments} />
+      <CommentList commentsToShow={comments} getAllComments={getAllComments} />
     </div>
   )
 }

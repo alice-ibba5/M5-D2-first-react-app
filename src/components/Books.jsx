@@ -1,7 +1,7 @@
 
 import { Col, Row, Tab, Tabs } from "react-bootstrap";
 import { useContext, useState } from "react";
-import SingleBook from './SingleBook'
+import SingleBook from '../components/SingleBook/index'
 import { useNavigate, useParams } from "react-router-dom";
 import GenreContext from '../contexts/genre';
 
@@ -33,10 +33,10 @@ const Books = ({ searchQuery }) => {
       </Tabs>
       
       <Col md={12}>
-      <Row className="g-2 mt-3">
+      <Row className="g-2 mt-3 row-gap-2">
         {allTheBooks?.filter((b) => b.title.toLowerCase().includes(searchQuery)).map((book) => {
             return (
-              <Col xs={12} md={3} key={book.asin}>
+              <Col xs={12} md={3} key={book.asin} className="d-flex">
                 <SingleBook 
                 book={book} 
                 selected={selected}
