@@ -3,6 +3,7 @@ import CommentList from './CommentList'
 import AddComment from './AddComment'
 import Loading from './Loading'
 import Error from './Error'
+import { Bearer } from '../Bearer'
 
 const CommentArea = ({ asin, getAllComments }) => {
   const [comments, setComments] = useState([])
@@ -17,7 +18,7 @@ const CommentArea = ({ asin, getAllComments }) => {
           'https://striveschool-api.herokuapp.com/api/comments/' + asin,
           {
             headers: {
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTM3YTMxOWU3NDZhMDAwMTQ4MTQzMjUiLCJpYXQiOjE2OTg2Nzg3MTEsImV4cCI6MTY5OTg4ODMxMX0.3N1a0TPRxchA1e5X9r5YkLcwsWGNk7Z8R6n4NYrD53k',
+              Authorization: Bearer,
             },
           }
         )
@@ -50,7 +51,7 @@ const CommentArea = ({ asin, getAllComments }) => {
       <h3>Add a comment:</h3>
       <AddComment asin={asin} getAllComments={getAllComments}/>
       <h3>Comment list:</h3>
-      <CommentList commentsToShow={comments} getAllComments={getAllComments} />
+      <CommentList commentsToShow={comments} comments={comments} setComments={setComments} />
     </div>
   )
 }

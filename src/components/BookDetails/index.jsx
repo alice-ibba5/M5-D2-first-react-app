@@ -5,6 +5,7 @@ import GenreContext from '../../contexts/genre';
 import { useContext, useCallback, useEffect } from "react";
 import cn from "classnames";
 import styles from "./styles.module.scss";
+import { Bearer } from '../../Bearer';
 
 export default function BookDetails () {
   const { genre, id } = useParams()
@@ -15,11 +16,10 @@ export default function BookDetails () {
 
   const getAllComments = useCallback(() => {
    
-    fetch(`https://striveschool-api.herokuapp.com/api/comments/${id}`, {
+    fetch(`https://striveschool-api.herokuapp.com/api/comments/` + id, {
       method: 'GET',
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTM3YTMxOWU3NDZhMDAwMTQ4MTQzMjUiLCJpYXQiOjE2OTg2Nzg3MTEsImV4cCI6MTY5OTg4ODMxMX0.3N1a0TPRxchA1e5X9r5YkLcwsWGNk7Z8R6n4NYrD53k",
+        Authorization: Bearer,
       },
     })
       .then((r) => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
+import { Bearer } from '../Bearer'
 
  const AddComment = ({ asin, getAllComments }) => {
   const [comment, setComment] = useState({
@@ -26,7 +27,7 @@ import { toast } from 'react-toastify'
           body: JSON.stringify(comment),
           headers: {
             'Content-type': 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTM3YTMxOWU3NDZhMDAwMTQ4MTQzMjUiLCJpYXQiOjE2OTg2Nzg3MTEsImV4cCI6MTY5OTg4ODMxMX0.3N1a0TPRxchA1e5X9r5YkLcwsWGNk7Z8R6n4NYrD53k',
+            Authorization: Bearer,
           },
         }
       )

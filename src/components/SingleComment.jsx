@@ -1,6 +1,7 @@
 import { Button, ListGroup } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { Trash } from 'react-bootstrap-icons';
+import { Bearer } from '../Bearer';
 
 const SingleComment = ({ comment, getAllComments }) => {
   const deleteComment = async (asin) => {
@@ -10,7 +11,7 @@ const SingleComment = ({ comment, getAllComments }) => {
         {
           method: 'DELETE',
           headers: {
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTM3YTMxOWU3NDZhMDAwMTQ4MTQzMjUiLCJpYXQiOjE2OTg2Nzg3MTEsImV4cCI6MTY5OTg4ODMxMX0.3N1a0TPRxchA1e5X9r5YkLcwsWGNk7Z8R6n4NYrD53k',
+            Authorization: Bearer,
           },
         }
       )
