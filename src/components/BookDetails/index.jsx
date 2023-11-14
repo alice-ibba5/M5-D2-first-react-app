@@ -7,7 +7,7 @@ import cn from "classnames";
 import styles from "./styles.module.scss";
 import { Bearer } from '../../Bearer';
 
-export default function BookDetails () {
+export default function BookDetails ( getComments ) {
   const { genre, id } = useParams()
   const { BooksByGenre } = useContext(GenreContext)
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ export default function BookDetails () {
         </Card>
         </Col>
       <Col md={6}>
-        <CommentArea asin={id} getAllComments={getAllComments} />
+        <CommentArea asin={id} getComments={getComments} />
         </Col>
     </Row>
   );

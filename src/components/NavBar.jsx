@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 
 const NavBar = ({ searchQuery, setSearchQuery }) => {
   const { theme, setTheme } = useContext(ThemeContext);
-  const { dark } = useContext(ThemeContext);
+  
   const navigate = useNavigate()
   const { genre } = useParams()
 

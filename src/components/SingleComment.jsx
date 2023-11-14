@@ -3,20 +3,26 @@ import { toast } from 'react-toastify'
 import { Trash } from 'react-bootstrap-icons';
 import { PencilSquare } from 'react-bootstrap-icons';
 import { Bearer } from '../Bearer';
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 const SingleComment = ({ id, comment, setComments }) => {
   const [loading, setLoading] = useState(true);
   const [editingComment, setEditingComment] = useState(null);
 
-  const getComments = () => {
-    fetch(`https://striveschool-api.herokuapp.com/api/books/${id}/comments/`)
+  const getComments = useCallback(() => {
+    fetch(`https://striveschool-api.herokuapp.com/api/books/${id}/comments/`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: Bearer,
+      },
+    })
       .then((r) => r.json())
       .then(setComments)
       .finally(() => {
         setLoading(false);
       });
-  };
+  });
 
   const deleteComment = (asin) => {
     fetch(
@@ -37,7 +43,7 @@ const SingleComment = ({ id, comment, setComments }) => {
       }
       
     })
-    .then(getComments)
+    .then(getComments())
     .catch((e) => console.error(e));
 };
   
