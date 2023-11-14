@@ -49,9 +49,9 @@ const CommentArea = ({ asin, getAllComments }) => {
       {isLoading && <Loading />}
       {isError && <Error />}
       <h3>Add a comment:</h3>
-      <AddComment asin={asin} getAllComments={getAllComments}/>
+      <AddComment asin={asin} />
       <h3>Comment list:</h3>
-      <CommentList commentsToShow={comments} comments={comments} setComments={setComments} />
+      <CommentList commentsToShow={comments} />
     </div>
   )
 }

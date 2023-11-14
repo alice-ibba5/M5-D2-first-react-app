@@ -1,8 +1,8 @@
 import { Navbar, Nav, Container, Form, Col, Row } from 'react-bootstrap'
 import ThemeContext from "../contexts/theme"
 import { useContext } from "react";
-import { Moon } from 'react-bootstrap-icons';
-import { Sun } from 'react-bootstrap-icons';
+import { MoonFill } from 'react-bootstrap-icons';
+import { SunFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom'
 import { useParams } from "react-router-dom";
 
@@ -37,8 +37,8 @@ const NavBar = ({ searchQuery, setSearchQuery }) => {
           </Form.Group>
         </Col>
         <Col xs={6} md={3} className="text-center align-items-center">
-        <button className="justify-content-center" onClick={() => setTheme(theme ? dark : "light")} >
-            {theme ? (<Moon />) : (<Sun />)}
+        <button  className="btn btn-light rounded-circle" onClick={() => setTheme(theme === "light" ? "dark" : "light")} >
+        {theme === "light" ? <MoonFill /> : <SunFill />}
           </button>
         </Col>
       </Row>

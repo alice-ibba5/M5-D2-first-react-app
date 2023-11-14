@@ -16,7 +16,7 @@ export default function BookDetails () {
 
   const getAllComments = useCallback(() => {
    
-    fetch(`https://striveschool-api.herokuapp.com/api/comments/` + id, {
+    fetch(`https://striveschool-api.herokuapp.com/api/books/${id}/comments/`, {
       method: 'GET',
       headers: {
         Authorization: Bearer,
@@ -57,7 +57,7 @@ export default function BookDetails () {
         </Card>
         </Col>
       <Col md={6}>
-        <CommentArea asin={id} />
+        <CommentArea asin={id} getAllComments={getAllComments} />
         </Col>
     </Row>
   );

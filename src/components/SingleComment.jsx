@@ -1,12 +1,25 @@
 import { Button, ListGroup } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { Trash } from 'react-bootstrap-icons';
+import { PencilSquare } from 'react-bootstrap-icons';
 import { Bearer } from '../Bearer';
+import React, { useState } from "react";
 
-const SingleComment = ({ comment, getAllComments }) => {
-  const deleteComment = async (asin) => {
-    try {
-      let response = await fetch(
+const SingleComment = ({ id, comment, setComments }) => {
+  const [loading, setLoading] = useState(true);
+  const [editingComment, setEditingComment] = useState(null);
+
+  const getComments = () => {
+    fetch(`https://striveschool-api.herokuapp.com/api/books/${id}/comments/`)
+      .then((r) => r.json())
+      .then(setComments)
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const deleteComment = (asin) => {
+    fetch(
         'https://striveschool-api.herokuapp.com/api/comments/' + asin,
         {
           method: 'DELETE',
@@ -15,27 +28,41 @@ const SingleComment = ({ comment, getAllComments }) => {
           },
         }
       )
-      if (response.ok) {
+      .then((r) => {
+      if (r.ok) {
         toast.success('La recensione è stata eliminata!');
-        getAllComments();
+        
       } else {
         throw new Error('La recensione non è stata eliminata!')
       }
-    } catch (error) {
-      toast.warn(error)
-    }
-  }
+      
+    })
+    .then(getComments)
+    .catch((e) => console.error(e));
+};
+  
 
   return (
     <ListGroup.Item className="d-flex justify-content-between">
       <h6>{comment.comment} - {comment.rate}</h6>
+      <div>
+      <Button
+        variant="warning"
+        className="ms-2 rounded-circle" 
+        onClick={() => deleteComment(comment._id)} 
+      >
+        <PencilSquare />
+      </Button>
+
+
       <Button
         variant="danger"
-        className="ms-2"
+        className="ms-2 rounded-circle" 
         onClick={() => deleteComment(comment._id)}
       >
         <Trash />
       </Button>
+      </div>
     </ListGroup.Item>
   )
 }

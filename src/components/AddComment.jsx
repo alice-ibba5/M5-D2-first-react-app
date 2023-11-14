@@ -85,7 +85,7 @@ import { Bearer } from '../Bearer'
             <option>5</option>
           </Form.Control>
         </Form.Group>
-        <Button variant="primary" type="submit" onSubmit={getAllComments}>
+        <Button variant="primary" type="submit" getAllComments={getAllComments}>
           Invia
         </Button>
       </Form>
