@@ -46,6 +46,29 @@ const SingleComment = ({ id, comment, setComments }) => {
     .then(getComments())
     .catch((e) => console.error(e));
 };
+
+const changeComment = (asin) => {
+  fetch(
+      'https://striveschool-api.herokuapp.com/api/comments/' + asin,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: Bearer,
+        },
+      }
+    )
+    .then((r) => {
+    if (r.ok) {
+      toast.success('La recensione è stata modificata!');
+      
+    } else {
+      throw new Error('La recensione non è stata modificata!')
+    }
+    
+  })
+  .then(getComments())
+  .catch((e) => console.error(e));
+};
   
 
   return (
@@ -55,7 +78,7 @@ const SingleComment = ({ id, comment, setComments }) => {
       <Button
         variant="warning"
         className="ms-2 rounded-circle" 
-        onClick={() => deleteComment(comment._id)} 
+        onClick={() => changeComment(comment._id)} 
       >
         <PencilSquare />
       </Button>
