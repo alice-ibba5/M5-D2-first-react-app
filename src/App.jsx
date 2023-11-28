@@ -7,7 +7,7 @@ import Welcome from './components/Welcome';
 import Books from './components/Books';
 import FooterWithLogo from './components/Footer';
 import { useState } from 'react'
-import ThemeContext from "./contexts/theme";  
+import ThemeContext from "./contexts/theme";
 import { Routes, Route } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import BookDetails from './components/BookDetails';
@@ -34,40 +34,40 @@ function App() {
   };
 
   return (
-    
+
     <ThemeContext.Provider value={{ theme, setTheme }}>
-    <div className={`${theme} App`}>
-    <NavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-    <GenreContext.Provider value={{BooksByGenre}}>
-    <Container>
-      
-        <Col><Welcome /></Col>
-        <Row className="d-flex">        
-        <Routes>
-          <Route path="/" element={<Books searchQuery={searchQuery} />} />
-          <Route path="/:genre" element={<Books searchQuery={searchQuery} />} />
-          <Route path="/:genre/:id" element={<BookDetails />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>     
-        </Row>      
-        <ToastContainer 
-           position="bottom-right"
-           autoClose={5000}
-           hideProgressBar={false}
-           newestOnTop={false}
-           closeOnClick
-           rtl={false}
-           pauseOnFocusLoss
-           draggable
-           pauseOnHover
-           theme="dark" />
-    </Container>
-    </GenreContext.Provider>
-    <FooterWithLogo />
-    </div>
+      <div className={`${theme} App`}>
+        <NavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <GenreContext.Provider value={{ BooksByGenre }}>
+          <Container>
+
+            <Col><Welcome /></Col>
+            <Row className="d-flex">
+              <Routes>
+                <Route path="/" element={<Books searchQuery={searchQuery} />} />
+                <Route path="/:genre" element={<Books searchQuery={searchQuery} />} />
+                <Route path="/:genre/:id" element={<BookDetails />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Row>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark" />
+          </Container>
+        </GenreContext.Provider>
+        <FooterWithLogo />
+      </div>
     </ThemeContext.Provider>
-    
-   
+
+
   );
 }
 
