@@ -19,6 +19,7 @@ import scifi from '../src/data/scifi.json'
 import GenreContext from '../src/contexts/genre'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import BooksHomeFantasy from './components/BooksHomeFantasy';
 
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
             <Col><Welcome /></Col>
             <Row className="d-flex">
               <Routes>
-                <Route path="/" element={<Books searchQuery={searchQuery} />} />
+                <Route path="/" element={<BooksHomeFantasy searchQuery={searchQuery} />} />
                 <Route path="/:genre" element={<Books searchQuery={searchQuery} />} />
                 <Route path="/:genre/:id" element={<BookDetails />} />
                 <Route path="*" element={<NotFound />} />
