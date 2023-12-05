@@ -8,7 +8,7 @@ import Books from './components/Books';
 import FooterWithLogo from './components/Footer';
 import { useState } from 'react'
 import ThemeContext from "./contexts/theme";
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import BookDetails from './components/BookDetails';
 import fantasy from '../src/data/fantasy.json'
@@ -45,7 +45,8 @@ function App() {
             <Col><Welcome /></Col>
             <Row className="d-flex">
               <Routes>
-                <Route path="/" element={<BooksHomeFantasy searchQuery={searchQuery} />} />
+                <Route path="/"
+                  element={<Navigate to="/fantasy" replace />} />
                 <Route path="/:genre" element={<Books searchQuery={searchQuery} />} />
                 <Route path="/:genre/:id" element={<BookDetails />} />
                 <Route path="*" element={<NotFound />} />
