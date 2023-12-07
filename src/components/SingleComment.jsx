@@ -19,30 +19,9 @@ const SingleComment = ({
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const getComments = useCallback(() => {
-    try {
-      fetch(`https://striveschool-api.herokuapp.com/api/books/${id}/comments/`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: Bearer,
-          },
-        })
-        .then((r) => r.json())
-        .then(setComments)
-        .finally(() => {
-          setLoading(false);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  }, [setComments, comment.elementId, setLoading]);
 
-  useEffect(() => {
-    getComments();
-  }, [getComments, setComments]);
 
-  const deleteComment = (asin) => {
+  const deleteComment = (asin, getAllComments) => {
     fetch(
       'https://striveschool-api.herokuapp.com/api/comments/' + asin,
       {
@@ -55,13 +34,14 @@ const SingleComment = ({
       .then((r) => {
         if (r.ok) {
           toast.success('Comment deleted successfully!');
+          getAllComments()
 
         } else {
           throw new Error('Something went wrong!')
         }
 
       })
-      .then(getComments())
+
       .catch((e) => console.error(e));
   };
 
@@ -100,7 +80,7 @@ const SingleComment = ({
         })
         .then(() => {
           setEditingComment(null);
-          getComments();
+
         })
         .finally(() => {
           setLoading(false);
@@ -113,6 +93,7 @@ const SingleComment = ({
   const handleCancelEdit = () => {
     setEditingComment(null);
   };
+
 
 
   return (
@@ -144,7 +125,7 @@ const SingleComment = ({
           </Card.Title>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Control
-              placeholder="Romanzo avvincente..."
+
               as="textarea"
               rows={3}
               type="text"

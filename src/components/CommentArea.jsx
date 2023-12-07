@@ -5,7 +5,7 @@ import Loading from './Loading'
 import Error from './Error'
 import { Bearer } from '../Bearer'
 
-const CommentArea = ({ asin, getAllComments }) => {
+const CommentArea = ({ asin }) => {
   const [comments, setComments] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
