@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { Bearer } from '../Bearer'
 
- const AddComment = ({ asin, getAllComments }) => {
+const AddComment = ({ asin, getAllComments }) => {
   const [comment, setComment] = useState({
     comment: '',
     rate: 1,
@@ -32,7 +32,9 @@ import { Bearer } from '../Bearer'
         }
       )
       if (response.ok) {
-        toast.success('Recensione inviata!')        
+        toast.success('Recensione inviata!', {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
         setComment({
           comment: '',
           rate: 1,
