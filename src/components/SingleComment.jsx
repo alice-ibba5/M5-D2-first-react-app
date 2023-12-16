@@ -14,7 +14,7 @@ const SingleComment = ({
   const [loading, setLoading] = useState(true);
   const [editingComment, setEditingComment] = useState(null);
   const [rateValue, setRateValue] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(comment.comment);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -33,8 +33,8 @@ const SingleComment = ({
     )
       .then((r) => {
         if (r.ok) {
+          window.location.reload();
           toast.success('Comment deleted successfully!');
-          getAllComments()
 
         } else {
           throw new Error('Something went wrong!')
@@ -69,9 +69,11 @@ const SingleComment = ({
       )
         .then((r) => {
           if (r.ok) {
+            window.location.reload();
             toast.success("Comment updated successfully!", {
               position: toast.POSITION.BOTTOM_RIGHT,
             });
+
           } else {
             toast.error("Something went wrong!", {
               position: toast.POSITION.TOP_LEFT,
@@ -129,7 +131,7 @@ const SingleComment = ({
               as="textarea"
               rows={3}
               type="text"
-              value={comment.comment.value}
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>

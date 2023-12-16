@@ -32,15 +32,16 @@ const AddComment = ({ asin, getAllComments }) => {
         }
       )
       if (response.ok) {
-        toast.success('Recensione inviata!', {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
+
         setComment({
           comment: '',
           rate: 1,
           elementId: null,
         })
-        getAllComments()
+        window.location.reload();
+        toast.success('Recensione inviata!', {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
 
       } else {
         throw new Error('Qualcosa è andato storto')
